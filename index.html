@@ -587,7 +587,6 @@
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US';
-
 			embeddedservice_bootstrap.init(
 				'00DS900000GhAUS',
 				'Asite_Messaging_Chatbot',
@@ -597,24 +596,16 @@
 				}
 			);
 
-			// Wait for messaging to be ready, then auto open
-			window.addEventListener(
-				'onEmbeddedMessagingReady',
-				() => {
-					embeddedservice_bootstrap.utilAPI.launchChat();
-				}
-			);
+			// Auto-open the chat once the bootstrap is ready
+			embeddedservice_bootstrap.addEventHandler('onEmbeddedMessagingReady', () => {
+				embeddedservice_bootstrap.utilAPI.launchChat();
+			});
 
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
 </script>
-
-<script
-	type='text/javascript'
-	src='https://asite--trigg.sandbox.my.site.com/ESWAsiteMessagingChatbo1779977663018/assets/js/bootstrap.min.js'
-	onload='initEmbeddedMessaging()'>
-</script>
+<script type='text/javascript' src='https://asite--trigg.sandbox.my.site.com/ESWAsiteMessagingChatbo1779977663018/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
